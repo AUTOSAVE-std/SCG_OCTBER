@@ -11,9 +11,8 @@ void setup() {
   mb = new MidiBus(this, -1, "AUTOSAVE");
   
   
-  String portName = Serial.list()[2]; 
+  String portName = Serial.list()[1]; 
   myPort = new Serial(this, portName, 9600);
-  myPort.bufferUntil('\n'); 
 
 }
 int GETintArray(Serial actualfuck){
@@ -32,9 +31,10 @@ void draw() {
  if ( myPort.available() > 0)  {
    //int inputAR1 = GETintArray(myPort);
    val = myPort.readStringUntil('\n');
-   
-     print(val);
-   
+   if(val != null) {
+     //print(val);
+     mb.sendNoteOn(0, 50, 255);
+   }
  }
  
 
